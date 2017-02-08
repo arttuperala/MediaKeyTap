@@ -34,6 +34,13 @@ class MediaApplicationWatcher {
         stop()
     }
 
+    func activate() {
+        let ownApp = NSRunningApplication.current()
+        mediaApps = mediaApps.filter { $0 != ownApp }
+        mediaApps.insert(ownApp, at: 0)
+        updateKeyInterceptStatus()
+    }
+
     func start() {
         let notificationCenter = NSWorkspace.shared().notificationCenter
 
